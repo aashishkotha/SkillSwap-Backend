@@ -1,0 +1,3 @@
+package com.skillswap.controller;
+import org.springframework.web.bind.annotation.*; import java.util.*;
+@RestController @RequestMapping("/api/chatbot") public class ChatbotController { @PostMapping public Map<String,String> chat(@RequestBody Map<String,String> x){String q=x.getOrDefault("message","").toLowerCase();String a=q.contains("swap")?"Choose a skill you can teach and a skill you want to learn, then send a swap request.":q.contains("match")?"SkillSwap matches users when one person's learning goal overlaps another person's teaching skill.":q.contains("jwt")?"JWT keeps authenticated API requests secure after login.":"Hi! I can help with profiles, skills, matching and skill swaps.";return Map.of("reply",a);} }

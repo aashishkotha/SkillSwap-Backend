@@ -1,0 +1,3 @@
+package com.skillswap.controller;
+import com.skillswap.model.User; import com.skillswap.repository.UserRepository; import org.springframework.web.bind.annotation.*; import java.util.List;
+@RestController @RequestMapping("/api/users") public class UserController {private final UserRepository repo; public UserController(UserRepository r){repo=r;} @GetMapping public List<User> all(){return repo.findAll();} @GetMapping("/{id}") public User one(@PathVariable Long id){return repo.findById(id).orElseThrow();} @PutMapping("/{id}") public User update(@PathVariable Long id,@RequestBody User input){User u=repo.findById(id).orElseThrow();u.setName(input.getName());u.setBio(input.getBio());return repo.save(u);} }
